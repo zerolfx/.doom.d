@@ -22,9 +22,13 @@
 ;; accept. For example:
 ;;
 (setq! line-spacing 0)
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 15)
-      doom-unicode-font (font-spec :family "Sarasa Mono SC Nerd" :size 15))
+(setq! zl/font-size
+       (if (= (display-pixel-height) 2160) 27 15))
+
+(setq! doom-font (font-spec :family "JetBrains Mono" :size zl/font-size :weight 'semi-light)
+       doom-variable-pitch-font (font-spec :family "Noto Sans CJK SC" :size zl/font-size)
+       doom-unicode-font (font-spec :family "Noto Sans Mono CJK SC" :size zl/font-size))
+
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -99,7 +103,8 @@
          ("TAB" . 'copilot-accept-completion))
   :config
   (setq! global-copilot-mode t)
-  (setq! copilot-idle-delay 0.2))
+  (setq! copilot-idle-delay 0.1)
+  (setq! copilot-log-max nil))
 
 ; migrate from spacemacs
 (map! :leader "0" 'treemacs-select-window
